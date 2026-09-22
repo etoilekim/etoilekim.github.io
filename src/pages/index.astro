@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import siteConfig from "../side.config";
+import { projects } from "../data/projects";
+---
+<Layout title="Home" schemaType="ProfilePage">
+  <section class="home-intro" aria-labelledby="name">
+    <div class="intro-copy">
+      <p class="eyebrow">Computational imaging · Georgia Tech</p>
+      <h1 id="name">Namhoon Kim</h1>
+      <p class="intro-role">Ph.D. student in Machine Learning</p>
+      <p class="intro-lead">Representing, reconstructing,<br class="desktop-break" /> and understanding the visual world.</p>
+      <div class="bio-copy">
+        <p>I am a Ph.D. student at <a href="https://www.gatech.edu/">Georgia Tech</a>, advised by <a href="https://sarafridov.github.io/">Sara Fridovich-Keil</a> in the <a href="https://voilalab.github.io/">VOILA Lab</a>. My research brings together computational imaging, signal representations, and inverse problems.</p>
+        <p>I study how representations and priors shape what we can recover from imperfect measurements. My work spans neural fields and explicit grids, training-free geometric priors for 3D reconstruction, and physics-based tomography—with an emphasis on understanding when a reconstruction can be trusted.</p>
+      </div>
+      <div class="profile-links" aria-label="Contact and profiles">
+        {siteConfig.socialLinks.map((link) => <a href={link.href}><span class={`${link.icon} text-base`} aria-hidden="true" />{link.label}</a>)}
+      </div>
+    </div>
+    <aside class="portrait-block">
+      <img src="/images/namhoon.jpeg" alt="Namhoon Kim" width="360" height="531" fetchpriority="high" />
+      <p>Electrical &amp; Computer Engineering<br />Georgia Institute of Technology</p>
+      <a href="mailto:namhoon@gatech.edu">namhoon@gatech.edu <span aria-hidden="true">↗</span></a>
+    </aside>
+  </section>
+  <section class="research-directions" aria-labelledby="research-heading">
+    <div class="section-topline"><h2 id="research-heading">Research directions</h2><span>What I work on</span></div>
+    <div class="directions-grid">
+      <a href="/projects/#inr-vs-grid" class="direction"><span class="direction-number">01</span><h3>Representations</h3><p>Understanding the capacity, bandwidth, and inductive biases of neural and explicit signal representations.</p><span class="direction-arrow" aria-hidden="true">↗</span></a>
+      <a href="/projects/#3d-foj" class="direction"><span class="direction-number">02</span><h3>Reconstruction</h3><p>Combining geometry and imaging physics to recover structure from noisy or incomplete measurements.</p><span class="direction-arrow" aria-hidden="true">↗</span></a>
+      <a href="/projects/#uncertainty" class="direction"><span class="direction-number">03</span><h3>Reliability</h3><p>Detecting distribution shift and understanding uncertainty when learned priors guide image reconstruction.</p><span class="direction-arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  <section class="selected-section" aria-labelledby="selected-heading">
+    <div class="section-topline"><h2 id="selected-heading">Selected projects</h2><a href="/projects/">All projects <span aria-hidden="true">↗</span></a></div>
+    <div class="selected-grid">
+      {projects.slice(0, 2).map((project) => (
+        <a class="selected-card" href={`/projects/#${project.id}`}>
+          <div class={`selected-image image-${project.id}`}><img src={project.image} alt={project.imageAlt} loading="lazy" width="640" height="360" /></div>
+          <div class="selected-meta"><span>{project.category}</span><span>{project.venue} {project.year}</span></div>
+          <h3>{project.shortTitle} <span aria-hidden="true">↗</span></h3><p>{project.question}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

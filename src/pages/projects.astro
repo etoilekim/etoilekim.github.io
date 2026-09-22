@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { projects } from "../data/projects";
+---
+<Layout title="Projects" description="Research by Namhoon Kim on neural and explicit representations, training-free 3D priors, uncertainty quantification, and low-dose CT.">
+  <header class="page-intro"><p class="eyebrow">Research</p><h1>Projects</h1><p>Representations, priors, and reliable reconstruction.<br />A closer look at the questions behind my first-author papers.</p></header>
+  <nav class="project-index" aria-label="Jump to a project">{projects.map((project) => <a href={`#${project.id}`}>{project.shortTitle}<span aria-hidden="true">↘</span></a>)}</nav>
+  <div class="project-list">
+    {projects.map((project, i) => (
+      <article id={project.id} class="research-project" aria-labelledby={`${project.id}-title`}>
+        <div class="project-visual">
+          <a class={`project-image image-${project.id}`} href={project.links[0].href} aria-label={`View ${project.shortTitle}`}><img src={project.image} alt={project.imageAlt} loading={i === 0 ? "eager" : "lazy"} width="800" height="600" /></a>
+          <div class="image-caption"><span>{String(i + 1).padStart(2, "0")}</span><span>{project.category}</span></div>
+        </div>
+        <div class="project-copy">
+          <p class="venue"><span>{project.venue}</span><span>{project.year}</span></p>
+          <h2 id={`${project.id}-title`}>{project.title}</h2>
+          <p class="authors"><strong>{project.authors.split(", ")[0]}</strong>{", " + project.authors.split(", ").slice(1).join(", ")}</p>
+          {project.equalContribution && <p class="author-note">{project.equalContribution}</p>}
+          <h3 class="project-question">{project.question}</h3><p class="project-summary">{project.summary}</p>
+          <div class="resource-links">{project.links.map((link, index) => <a class:list={["resource-link", { "resource-primary": index === 0 }]} href={link.href}>{link.label}<span aria-hidden="true">↗</span></a>)}</div>
+          {project.related && <div class="related-paper"><p class="related-label">Related workshop paper</p><p>{project.related.title}</p><a href={project.related.href}>{project.related.venue} <span aria-hidden="true">↗</span></a></div>}
+        </div>
+      </article>
+    ))}
+  </div>
+</Layout>

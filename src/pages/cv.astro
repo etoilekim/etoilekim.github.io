@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "pdfjs-dist/web/pdf_viewer.css";
+const pdf = "/files/CV_Namhoon_Kim.pdf";
+---
+<Layout title="CV" description="Curriculum vitae of Namhoon Kim, Ph.D. student in Machine Learning at Georgia Tech.">
+  <header class="page-intro cv-intro"><div><p class="eyebrow">Curriculum vitae</p><h1>CV</h1></div><div class="cv-actions"><a class="resource-link" href={pdf} target="_blank" rel="noopener noreferrer">Open PDF <span aria-hidden="true">↗</span></a><a class="resource-link resource-primary" href={pdf} download>Download <span aria-hidden="true">↓</span></a></div></header>
+  <section class="cv-reader" aria-label="Curriculum vitae PDF" data-pdf-url={pdf}>
+    <div class="pdf-toolbar">
+      <span id="pdf-page-status" role="status">Loading PDF…</span>
+      <div class="pdf-zoom-controls" aria-label="PDF zoom">
+        <button id="pdf-zoom-out" type="button" aria-label="Zoom out" disabled>−</button>
+        <output id="pdf-zoom-level" aria-label="Zoom level">—</output>
+        <button id="pdf-zoom-in" type="button" aria-label="Zoom in" disabled>+</button>
+        <button id="pdf-fit-width" type="button" disabled>Fit width</button>
+      </div>
+    </div>
+    <div class="cv-document">
+      <div id="pdf-container" tabindex="0" aria-label="Scrollable CV document"><div class="pdfViewer"></div></div>
+    </div>
+  </section>
+  <noscript><p class="cv-fallback">JavaScript is needed for the embedded viewer. <a href={pdf}>Open the original PDF</a>.</p></noscript>
+  <p class="cv-fallback">Prefer a separate window? <a href={pdf} target="_blank" rel="noopener noreferrer">Open the original PDF</a>.</p>
+</Layout>
+<script>
+  import { setupPdfViewer } from "../scripts/pdf-viewer";
+  let dispose: (() => void) | undefined;
+  const initialize = () => { dispose?.(); dispose = setupPdfViewer(); };
+  document.addEventListener("astro:page-load", initialize);
+  document.addEventListener("astro:before-swap", () => { dispose?.(); dispose = undefined; });
+</script>
