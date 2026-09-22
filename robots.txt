@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://etoilekim.github.io/sitemap-index.xml
