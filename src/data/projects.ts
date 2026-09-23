@@ -15,7 +15,7 @@ export const projects: ResearchProject[] = [
     equalContribution: "* Equal contribution; author order determined by coin flip.",
     question: "Recovering 3D structure without training data.",
     summary: "We represent a volume as overlapping junctions of 3D wedges, fitting local geometry while encouraging consistency across patches. This training-free prior preserves sharp boundaries in noisy low-dose CT, cryo-electron tomography, and point clouds, and can be used within iterative reconstruction algorithms.",
-    image: "/images/3d-foj.png", imageAlt: "A 3D junction partitioning a volumetric patch into geometric wedges.",
+    image: "/images/3d-foj-teaser.png", imageAlt: "3D FoJ reconstructions for low-dose CT, cryo-electron tomography, and point-cloud denoising.",
     links: [
       { label: "Project page", href: "https://voilalab.github.io/3D-Field-of-Junctions/" },
       { label: "Paper", href: "https://arxiv.org/abs/2603.02149" },
@@ -30,7 +30,7 @@ export const projects: ResearchProject[] = [
     authors: "Namhoon Kim, Sara Fridovich-Keil",
     question: "When is a neural representation the right choice?",
     summary: "We compare neural, hybrid, and grid representations across 2D and 3D signals at matched parameter budgets. Regularized interpolated grids often fit dense signals faster and more accurately, while neural representations can be advantageous for lower-dimensional structure such as shape contours. The benchmark connects these differences to signal bandwidth, model capacity, and inverse tasks.",
-    image: "/images/inr-vs-grid.png", imageAlt: "Reconstruction quality and training speed of neural and grid representations at matched parameter budgets.",
+    image: "/images/inr-signal-examples.png", imageAlt: "Sphere patterns, Sierpinski triangles, and bandlimited signals with increasing spatial complexity.",
     links: [
       { label: "Project page", href: "https://voilalab.github.io/INR-benchmark/" },
       { label: "Paper", href: "https://openreview.net/forum?id=OZljvntsto" },
@@ -44,7 +44,7 @@ export const projects: ResearchProject[] = [
     authors: "Namhoon Kim, Sara Fridovich-Keil",
     question: "Recognizing when a learned prior may be unreliable.",
     summary: "A learned prior can produce a convincing reconstruction even when the target differs from its training data. We use variation across reconstructions from randomized measurements as an instance-level indicator of distribution shift. Experiments on tomographic reconstruction of MNIST digits show increased instability for out-of-distribution targets, without calibration data or retraining.",
-    image: "/images/uncertainty.png", imageAlt: "Reconstruction variability is lower for the in-distribution digit zero and higher for out-of-distribution digits.",
+    image: "/images/uncertainty-reconstructions.png", imageAlt: "MNIST digit reconstructions from 11, 22, and 33 projection angles compared with ground truth.",
     links: [
       { label: "Project page", href: "https://voilalab.github.io/uncertainty_quantification_LPN/" },
       { label: "Paper", href: "https://arxiv.org/abs/2510.10947" },
