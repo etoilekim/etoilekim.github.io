@@ -74,6 +74,16 @@ python3 scripts/sync_cv.py --source "/path/to/CV_Namhoon_Kim.pdf" --apply
 python3 -m unittest discover -s scripts -p 'test_sync_cv.py'
 ```
 
+## 방문 통계
+
+[Statcounter 대시보드](https://statcounter.com/p13356383/)에서 로그인 후 방문 시각, 국가·도시, 방문 페이지와 유입 경로를 확인할 수 있습니다. 위치는 IP 기반 추정치입니다. 과거 방문 기록은 소급해서 수집되지 않습니다.
+
+연결 설정은 `src/config/analytics.ts`입니다. `projectId`와 `securityCode`는 웹사이트 설치용 공개 값이며 계정 비밀번호나 API 키가 아닙니다. 값을 비우고 다시 배포하면 추적을 끌 수 있습니다.
+
+추적 스크립트는 실제 HTTPS 공개 사이트에서만 로드됩니다. 로컬 개발·미리보기, 브라우저의 Do Not Track/Global Privacy Control 요청은 제외합니다. Astro 페이지 전환과 Statcounter의 자동 감지가 같은 페이지를 중복 집계하지 않도록 처리했습니다. JavaScript나 분석 스크립트를 차단한 방문, PDF 주소를 직접 여는 방문은 집계되지 않을 수 있습니다. 사이트의 CV 페이지 방문은 집계됩니다.
+
+무료 플랜은 월 5,000세션과 최근 14일의 상세 기록을 제공합니다. 최신 한도는 [공식 요금 안내](https://statcounter.com/pricing/)를 확인하세요.
+
 ## 출처
 
 - [Scholarly / astro-theme-scholars](https://github.com/jxpeng98/astro-theme-scholars): MIT. 원본 저작권 고지는 `LICENSE`에 보존했습니다.

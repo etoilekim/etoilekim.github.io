@@ -835,8 +835,13 @@ function isActiveNav(href: string): boolean {
 
     <script>
       import { setupLayoutUi } from "../scripts/layout-ui";
+      import { statcounterConfig } from "../config/analytics";
+      import { createPageTracker } from "../scripts/analytics";
 
       document.addEventListener("astro:page-load", setupLayoutUi);
+      if (import.meta.env.PROD) {
+        document.addEventListener("astro:page-load", createPageTracker(statcounterConfig));
+      }
     </script>
   </body>
 </html>
