@@ -53,4 +53,8 @@ The journal submission listed as under review in the CV is presented as a prepri
 - Figure: [original material maps](https://arxiv.org/html/2602.02713v1/material_maps.png).
 - No dedicated project page was identified, so the entry links directly to the paper and code.
 
-Scientific source images are preserved unchanged. Thumbnails use CSS cropping to fit the cards; linked project pages provide the full figures and research context.
+Scientific source images are preserved unchanged. `ResearchThumbnail.astro` composes exact source viewports in a fixed 3:2 layout, with labels outside the image panels. No image data is generated, retouched, or stretched. The linked project pages provide the complete original figures.
+
+- 3D FoJ: noisy-input detail and 3D FoJ result for all three modalities; other baseline columns are omitted. The source's overlaid method captions are excluded and replaced by shared row labels.
+- INRs vs. grids: complete tiles at complexity 0.1, 0.3, 0.5, and 0.7, retaining all three signal families.
+- Uncertainty: complete digit 0, 1, 4, and 7 tiles for 11 angles, 33 angles, and ground truth. The intermediate 22-angle row is omitted to keep the thumbnail readable.

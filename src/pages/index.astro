@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import siteConfig from "../side.config";
 import { projects } from "../data/projects";
+import ResearchThumbnail from "../components/ResearchThumbnail.astro";
 ---
 <Layout title="Home" schemaType="ProfilePage">
   <section class="home-intro" aria-labelledby="name">
@@ -35,7 +36,7 @@ import { projects } from "../data/projects";
     <div class="selected-grid">
       {projects.slice(0, 2).map((project) => (
         <a class="selected-card" href={`/projects/#${project.id}`}>
-          <div class={`selected-image image-${project.id}`}><img src={project.image} alt={project.imageAlt} loading="lazy" width="640" height="360" /></div>
+          <div class={`selected-image image-${project.id}`}><ResearchThumbnail project={project} /></div>
           <div class="selected-meta"><span>{project.category}</span><span>{project.venue} {project.year}</span></div>
           <h3>{project.shortTitle} <span aria-hidden="true">↗</span></h3><p>{project.question}</p>
         </a>

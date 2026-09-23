@@ -1,0 +1,91 @@
+---
+import type { ResearchProject } from "../data/projects";
+
+interface Props {
+  project: ResearchProject;
+  loading?: "eager" | "lazy";
+}
+const { project, loading = "lazy" } = Astro.props;
+type Crop = [number, number, number, number];
+type Panel = { crop: Crop; x: number; y: number; width: number; height: number };
+type Label = { text: string; x: number; y: number; anchor?: "start" | "middle"; accent?: boolean };
+
+let sourceWidth = 0;
+let sourceHeight = 0;
+let panels: Panel[] = [];
+let labels: Label[] = [];
+
+// These viewports select complete source panels, never regenerate figure data.
+if (project.id === "3d-foj") {
+  sourceWidth = 1728;
+  sourceHeight = 690;
+  const modalities = [
+    { label: "Low-dose CT", input: [398, 31, 238, 143], result: [664, 31, 238, 143] },
+    { label: "Cryo-ET", input: [398, 229, 238, 137], result: [664, 229, 238, 137] },
+    { label: "Point clouds", input: [398, 421, 238, 199], result: [664, 421, 238, 199] },
+  ];
+  labels = [
+    { text: "Noisy input", x: 24, y: 60 },
+    { text: "3D FoJ", x: 24, y: 232, accent: true },
+  ];
+  modalities.forEach((modality, col) => {
+    const x = 24 + col * 188;
+    labels.push({ text: modality.label, x: x + 88, y: 28, anchor: "middle" });
+    panels.push(
+      { crop: modality.input as Crop, x, y: 72, width: 176, height: 128 },
+      { crop: modality.result as Crop, x, y: 244, width: 176, height: 128 },
+    );
+  });
+} else if (project.id === "inr-vs-grid" || project.id === "uncertainty") {
+  const inr = project.id === "inr-vs-grid";
+  sourceWidth = inr ? 1776 : 1544;
+  sourceHeight = inr ? 632 : 662;
+  const cols = inr ? [0, 2, 4, 6] : [0, 1, 4, 7];
+  const rows = inr ? [0, 1, 2] : [0, 2, 3];
+  const rowNames = inr ? ["Spheres", "Sierpinski", "Bandlimited"] : ["11 angles", "33 angles", "Ground truth"];
+  const sourceRows = inr ? [91, 267, 443] : [81, 218, 357, 494];
+
+  cols.forEach((sourceCol, col) => {
+    labels.push({ text: inr ? ((sourceCol + 1) / 10).toFixed(1) : `Digit ${sourceCol}`, x: 178 + col * 114, y: 29, anchor: "middle" });
+  });
+  rows.forEach((sourceRow, row) => {
+    labels.push({ text: rowNames[row], x: 16, y: 106 + row * 116 });
+    cols.forEach((sourceCol, col) => {
+      const crop: Crop = inr
+        ? [245 + sourceCol * 170, sourceRows[sourceRow], 154, 154]
+        : [148 + sourceCol * 135, sourceRows[sourceRow], 111, 111];
+      panels.push({ crop, x: 124 + col * 114, y: 46 + row * 116, width: 108, height: 108 });
+    });
+  });
+}
+
+// Match each viewport to its source aspect ratio so neighboring panels cannot
+// leak into the margins when the thumbnail is scaled to a different card size.
+const fittedPanels = panels.map((panel) => {
+  const scale = Math.min(panel.width / panel.crop[2], panel.height / panel.crop[3]);
+  const width = panel.crop[2] * scale;
+  const height = panel.crop[3] * scale;
+  return { ...panel, x: panel.x + (panel.width - width) / 2, y: panel.y + (panel.height - height) / 2, width, height };
+});
+---
+{panels.length ? (
+  <svg class="research-thumbnail" viewBox="0 0 600 400" role="img" aria-label={project.imageAlt} focusable="false">
+    <rect width="600" height="400" fill="#fff" />
+    <g aria-hidden="true">
+      {fittedPanels.map((panel) => (
+        <svg x={panel.x} y={panel.y} width={panel.width} height={panel.height} viewBox={panel.crop.join(" ")} overflow="hidden">
+          <image href={project.image} width={sourceWidth} height={sourceHeight} />
+        </svg>
+      ))}
+      {labels.map((label) => (
+        <text x={label.x} y={label.y} text-anchor={label.anchor ?? "start"} fill={label.accent ? "#365f6b" : "#4b514d"} font-size={label.anchor ? 20 : 19} font-weight={label.accent ? 700 : 400}>{label.text}</text>
+      ))}
+    </g>
+  </svg>
+) : (
+  <img src={project.image} alt={project.imageAlt} loading={loading} width="800" height="600" />
+)}
+
+<style>
+  .research-thumbnail { display: block; width: 100%; height: 100%; font-family: 'Atkinson Hyperlegible', Arial, sans-serif; }
+</style>

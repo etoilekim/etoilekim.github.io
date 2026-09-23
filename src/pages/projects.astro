@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { projects } from "../data/projects";
+import ResearchThumbnail from "../components/ResearchThumbnail.astro";
 ---
 <Layout title="Projects" description="Research by Namhoon Kim on neural and explicit representations, training-free 3D priors, uncertainty quantification, and low-dose CT.">
   <header class="page-intro"><p class="eyebrow">Research</p><h1>Projects</h1><p>Representations, priors, and reliable reconstruction.<br />A closer look at the questions behind my first-author papers.</p></header>
@@ -9,7 +10,7 @@ import { projects } from "../data/projects";
     {projects.map((project, i) => (
       <article id={project.id} class="research-project" aria-labelledby={`${project.id}-title`}>
         <div class="project-visual">
-          <a class={`project-image image-${project.id}`} href={project.links[0].href} aria-label={`View ${project.shortTitle}`}><img src={project.image} alt={project.imageAlt} loading={i === 0 ? "eager" : "lazy"} width="800" height="600" /></a>
+          <a class={`project-image image-${project.id}`} href={project.links[0].href} aria-label={`View ${project.shortTitle}`}><ResearchThumbnail project={project} loading={i === 0 ? "eager" : "lazy"} /></a>
           <div class="image-caption"><span>{String(i + 1).padStart(2, "0")}</span><span>{project.category}</span></div>
         </div>
         <div class="project-copy">

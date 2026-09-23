@@ -22,9 +22,5 @@ a:focus-visible{outline:2px solid var(--site-accent);outline-offset:5px;border-r
 @media(max-width:640px){.profile-links{gap:8px 14px}.home-intro{display:flex;flex-direction:column;padding:26px 0 32px;gap:26px}.home-intro h1{font-size:3.55rem}.eyebrow{font-size:.65rem}.intro-lead{font-size:1.75rem;margin:23px 0 19px}.bio-copy{font-size:1rem}.portrait-block{padding:0;display:grid;grid-template-columns:92px 1fr;gap:19px;align-items:center}.portrait-block img{width:92px;height:113px}.portrait-block>a{margin-top:0}.directions-grid{grid-template-columns:1fr;gap:6px}.direction{padding:18px 29px 18px 34px}.direction-number{position:absolute;top:25px;left:0}.direction h3{margin:0 0 7px}.direction-arrow{top:24px}.section-topline h2{font-size:1.8rem}.section-topline>span{display:none}.selected-grid{grid-template-columns:1fr;gap:30px}.selected-image{height:205px}.selected-meta{margin-top:14px}.selected-section{padding-top:28px}.research-project{grid-template-columns:1fr;gap:22px;padding:32px 0}.project-image{height:225px}.project-copy h2{font-size:1.9rem}.page-intro{padding-top:25px}.page-intro h1{font-size:3.5rem}.page-intro>p:last-child{font-size:1rem}.project-index{gap:4px 20px}.cv-intro{align-items:flex-end;padding-bottom:20px}.cv-intro h1{margin-bottom:0}.cv-actions{gap:7px}.cv-actions .resource-link{font-size:.72rem;padding:6px 10px;gap:7px}.cv-document{min-height:550px}.pdf-toolbar{padding:8px;font-size:.72rem;gap:6px}.pdf-zoom-controls{gap:4px}.research-directions{padding-top:28px}}
 @media(prefers-reduced-motion:reduce){.selected-image img,.direction-arrow{transition:none}}
 
-/* Frame wide research figures without altering the original scientific images. */
-.image-3d-foj,.image-inr-vs-grid,.image-uncertainty{padding:0;overflow:hidden}
-.image-3d-foj img,.image-inr-vs-grid img,.image-uncertainty img{object-fit:cover}
-.image-3d-foj img{object-position:37% center}
-.image-inr-vs-grid img{object-position:58% center}
-.image-uncertainty img{object-position:left center}
+/* Curated figures retain the same complete panel layout at every breakpoint. */
+.image-3d-foj,.image-inr-vs-grid,.image-uncertainty{display:block;padding:0;height:auto;aspect-ratio:3/2;overflow:hidden}
