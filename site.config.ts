@@ -9,7 +9,7 @@ export const siteConfig = defineSiteConfig({
     profileImage: "/images/namhoon.jpeg", profileAlt: "Portrait of Namhoon Kim", profileImageWidth: 360, profileImageHeight: 531,
   },
   affiliations: [{ role: "Ph.D. student in Machine Learning", department: "Electrical and Computer Engineering", institution: "Georgia Institute of Technology", url: "https://www.gatech.edu/" }],
-  navLinks: [{ href: "/", label: "Home" }, { href: "/projects/", label: "Projects" }, { href: "/cv/", label: "CV" }],
+  navLinks: [{ href: "/", label: "Home" }, { href: "/projects/", label: "Publications" }, { href: "/cv/", label: "CV" }],
   researchInterests: ["Computational imaging", "Signal representations", "Inverse problems", "Uncertainty quantification"],
   socialLinks: [
     { label: "Email", href: "mailto:namhoon@gatech.edu", icon: "i-ph-envelope" },

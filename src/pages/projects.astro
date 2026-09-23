@@ -3,9 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import { projects } from "../data/projects";
 import ResearchThumbnail from "../components/ResearchThumbnail.astro";
 ---
-<Layout title="Projects" description="Research by Namhoon Kim on neural and explicit representations, training-free 3D priors, uncertainty quantification, and low-dose CT.">
-  <header class="page-intro"><p class="eyebrow">Research</p><h1>Projects</h1><p>Representations, priors, and reliable reconstruction.<br />A closer look at the questions behind my first-author papers.</p></header>
-  <nav class="project-index" aria-label="Jump to a project">{projects.map((project) => <a href={`#${project.id}`}>{project.shortTitle}<span aria-hidden="true">↘</span></a>)}</nav>
+<Layout title="Publications" description="Research by Namhoon Kim on neural and explicit representations, training-free 3D priors, uncertainty quantification, and low-dose CT.">
+  <header class="page-intro"><p class="eyebrow">Research</p><h1>Publications</h1><p>Representations, priors, and reliable reconstruction.<br />A closer look at the questions behind my first-author papers.</p></header>
+  <nav class="project-index" aria-label="Jump to a publication">{projects.map((project) => <a href={`#${project.id}`}>{project.shortTitle}<span aria-hidden="true">↘</span></a>)}</nav>
   <div class="project-list">
     {projects.map((project, i) => (
       <article id={project.id} class="research-project" aria-labelledby={`${project.id}-title`}>
