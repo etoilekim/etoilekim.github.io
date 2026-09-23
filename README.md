@@ -76,7 +76,7 @@ python3 -m unittest discover -s scripts -p 'test_sync_cv.py'
 
 ## 방문 통계
 
-[Statcounter 대시보드](https://statcounter.com/p13356383/)에서 로그인 후 방문 시각, 국가·도시, 방문 페이지와 유입 경로를 확인할 수 있습니다. 위치는 IP 기반 추정치입니다. 과거 방문 기록은 소급해서 수집되지 않습니다.
+[Statcounter 대시보드](https://statcounter.com/p13356383/summary/)에서 로그인 후 방문 시각, 국가·도시, 방문 페이지와 유입 경로를 확인할 수 있습니다. 위치는 IP 기반 추정치이며 전체 IP 주소는 저장하지 않도록 설정했습니다. 시간대는 America/New_York입니다. 과거 방문 기록은 소급해서 수집되지 않습니다.
 
 연결 설정은 `src/config/analytics.ts`입니다. `projectId`와 `securityCode`는 웹사이트 설치용 공개 값이며 계정 비밀번호나 API 키가 아닙니다. 값을 비우고 다시 배포하면 추적을 끌 수 있습니다.
 

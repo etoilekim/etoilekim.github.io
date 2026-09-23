@@ -14,6 +14,7 @@ import {
   type SeoBreadcrumb,
 } from "../lib/seo";
 import siteConfig from "../side.config";
+import { statcounterConfig } from "../config/analytics";
 
 export interface Props {
   contentSource?: string;
@@ -110,6 +111,11 @@ const structuredData = buildStructuredData({
   breadcrumbs,
 });
 const structuredDataJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");
+// Keep the vendor's installation values in the HTML for its setup checker.
+// The client loader below controls when the external tracker may run.
+const analyticsBootstrap = statcounterConfig.projectId && statcounterConfig.securityCode
+  ? `var sc_project=${Number(statcounterConfig.projectId)};\nvar sc_invisible=1;\nvar sc_security=${JSON.stringify(statcounterConfig.securityCode).replace(/</g, "\\u003c")};`
+  : "";
 const extendedMeta = [
   { name: "author", content: siteConfig.author },
   ...(siteConfig.keywords.length
@@ -833,6 +839,9 @@ function isActiveNav(href: string): boolean {
       </button>
     </div>
 
+    {import.meta.env.PROD && analyticsBootstrap && (
+      <script is:inline set:html={analyticsBootstrap}></script>
+    )}
     <script>
       import { setupLayoutUi } from "../scripts/layout-ui";
       import { statcounterConfig } from "../config/analytics";
