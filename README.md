@@ -84,6 +84,8 @@ python3 -m unittest discover -s scripts -p 'test_sync_cv.py'
 
 무료 플랜은 월 5,000세션과 최근 14일의 상세 기록을 제공합니다. 최신 한도는 [공식 요금 안내](https://statcounter.com/pricing/)를 확인하세요.
 
+Statcounter의 정적 설치 검사기는 이 사이트의 JavaScript 번들 안에서 동적으로 로드하는 추적 코드를 인식하지 못합니다. 잘못된 설치 경고를 피하도록 주기적 코드 검사를 껐으며, 실제 공개 사이트에서 Home → Projects → CV를 방문하여 각 페이지가 한 번씩 기록되는 것으로 설치를 검증했습니다. 동작 여부는 **Recent Activity → Page View Activity**에서 확인하세요. 대시보드는 비공개이며 Basic 플랜을 적용했습니다.
+
 ## 출처
 
 - [Scholarly / astro-theme-scholars](https://github.com/jxpeng98/astro-theme-scholars): MIT. 원본 저작권 고지는 `LICENSE`에 보존했습니다.
